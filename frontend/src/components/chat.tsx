@@ -1,7 +1,8 @@
 import { useState, useRef, useEffect } from "react";
 import ReactMarkdown from "react-markdown";
-import { sendChatMessage } from "../axios/chatService"; // import from the service file
+import { sendChatMessage } from "../axios/chatService";
 import IntroText from "./IntroText";
+import { v4 as uuidv4 } from "uuid"; // for generating unique session ids
 
 interface Message {
   role: "user" | "assistant";
@@ -13,6 +14,9 @@ export default function Chat() {
   const [input, setInput] = useState("");
   const [loading, setLoading] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement | null>(null);
+
+  // generate a session id for this browser session
+  const [sessionId] = useState<string>(() => uuidv4());
 
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -31,7 +35,7 @@ export default function Chat() {
     setLoading(true);
 
     try {
-      const answer = await sendChatMessage(userInput);
+      const answer = await sendChatMessage(sessionId, userInput);
       setMessages((prev) => [...prev, { role: "assistant", content: answer }]);
     } catch (err) {
       console.error(err);
@@ -42,47 +46,44 @@ export default function Chat() {
 
   return (
     <div className="max-w-3xl mx-auto p-4 pb-8 flex flex-col h-screen">
-      {/* <div className="flex-1 overflow-y-auto space-y-4 scrollbar-hide p-4 rounded"> */}
-        <div className="flex-1 overflow-y-auto space-y-4 scrollbar-hide p-4 rounded">
-  {messages.length === 0 && !loading ? (
-    
-    <IntroText /> // show intro when there are no messages yet
-  ) : (
-    <>
-        {messages.map((m, i) => (
-          <div
-            key={i}
-            className={`flex w-full ${m.role === "user" ? "justify-end" : "justify-start"}`}
-          >
-            <div
-              className={`p-2 rounded-lg max-w-lg ${
-                m.role === "user"
-                  ? "bg-blue-500 text-white"
-                  : "bg-gray-200 text-black"
-              }`}
-            >
-              <ReactMarkdown>{m.content}</ReactMarkdown>
-            </div>
-          </div>
-        ))}
+      <div className="flex-1 overflow-y-auto space-y-4 scrollbar-hide p-4 rounded">
+        {messages.length === 0 && !loading ? (
+          <IntroText />
+        ) : (
+          <>
+            {messages.map((m, i) => (
+              <div
+                key={i}
+                className={`flex w-full ${m.role === "user" ? "justify-end" : "justify-start"}`}
+              >
+                <div
+                  className={`p-2 rounded-lg max-w-lg ${
+                    m.role === "user"
+                      ? "bg-blue-500 text-white"
+                      : "bg-gray-200 text-black"
+                  }`}
+                >
+                  <ReactMarkdown>{m.content}</ReactMarkdown>
+                </div>
+              </div>
+            ))}
 
-        {loading && (
-          <div className="flex justify-start">
-            <div className="bg-gray-200 text-gray-600 px-3 py-2 rounded-lg flex gap-1">
-              <span className="animate-bounce">.</span>
-              <span className="animate-bounce [animation-delay:0.2s]">.</span>
-              <span className="animate-bounce [animation-delay:0.4s]">.</span>
-            </div>
-          </div>
+            {loading && (
+              <div className="flex justify-start">
+                <div className="bg-gray-200 text-gray-600 px-3 py-2 rounded-lg flex gap-1">
+                  <span className="animate-bounce">.</span>
+                  <span className="animate-bounce [animation-delay:0.2s]">.</span>
+                  <span className="animate-bounce [animation-delay:0.4s]">.</span>
+                </div>
+              </div>
+            )}
+          </>
         )}
- </>
-  )}
-  <div ref={messagesEndRef} />
-</div>
-        {/* <div ref={messagesEndRef} />
-      </div> */}
+        <div ref={messagesEndRef} />
+      </div>
 
-      <div className="flex items-center border rounded-full p-1 px-2">
+      {/* Input and send button in one rounded container */}
+      <div className="flex items-center border rounded-full p-1 px-2 mt-2 bg-white">
         <input
           className="flex-1 p-3 rounded-full outline-none border-none"
           value={input}
