@@ -36,5 +36,5 @@ It supports:
 
 1. Clone the repo  
    ```bash
-   git clone https://github.com/yourusername/ai-chatbot.git
-   cd ai-chatbot
+   git clone https://github.com/ABAbdulah/rag-chatbot.git
+   cd rag-chatbot
