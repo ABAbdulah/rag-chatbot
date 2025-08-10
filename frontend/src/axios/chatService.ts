@@ -1,8 +1,9 @@
 import axios from "axios";
 
-export async function sendChatMessage(question: string) {
+export const sendChatMessage = async (sessionId: string, question: string) => {
   const res = await axios.post("http://localhost:8000/chat", {
-    question,
+    session_id: sessionId,
+    question: question
   });
   return res.data.answer;
-}
+};
