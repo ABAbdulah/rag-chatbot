@@ -1,0 +1,44 @@
+[33m34b3543[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mbackend[m[33m)[m HEAD@{0}: commit: Ignore db folder to avoid merge conflicts
+[33m82201a2[m[33m ([m[1;31morigin/backend[m[33m)[m HEAD@{1}: reset: moving to 82201a2289e8d5d114476f07842b238370485a02
+[33m82201a2[m[33m ([m[1;31morigin/backend[m[33m)[m HEAD@{2}: reset: moving to 82201a2289e8d5d114476f07842b238370485a02
+[33m82201a2[m[33m ([m[1;31morigin/backend[m[33m)[m HEAD@{3}: commit (merge): strict RAG prompt -2
+[33mea269e9[m HEAD@{4}: commit: strict RAG prompt
+[33m8f529e6[m[33m ([m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m, [m[1;32mmain[m[33m)[m HEAD@{5}: checkout: moving from backend to backend
+[33m8f529e6[m[33m ([m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m, [m[1;32mmain[m[33m)[m HEAD@{6}: checkout: moving from backend to backend
+[33m8f529e6[m[33m ([m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m, [m[1;32mmain[m[33m)[m HEAD@{7}: merge main: Fast-forward
+[33m775f7c9[m HEAD@{8}: checkout: moving from frontend to backend
+[33m6e6c4cf[m[33m ([m[1;31morigin/frontend[m[33m, [m[1;32mfrontend[m[33m)[m HEAD@{9}: commit: merged main
+[33m8f529e6[m[33m ([m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m, [m[1;32mmain[m[33m)[m HEAD@{10}: merge main: Fast-forward
+[33m047ad17[m HEAD@{11}: checkout: moving from main to frontend
+[33m8f529e6[m[33m ([m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m, [m[1;32mmain[m[33m)[m HEAD@{12}: pull: Fast-forward
+[33m775f7c9[m HEAD@{13}: checkout: moving from frontend to main
+[33m047ad17[m HEAD@{14}: checkout: moving from main to frontend
+[33m775f7c9[m HEAD@{15}: checkout: moving from frontend to main
+[33m047ad17[m HEAD@{16}: reset: moving to HEAD
+[33m047ad17[m HEAD@{17}: checkout: moving from main to frontend
+[33m775f7c9[m HEAD@{18}: reset: moving to HEAD
+[33m775f7c9[m HEAD@{19}: checkout: moving from backend to main
+[33m775f7c9[m HEAD@{20}: merge main: Fast-forward
+[33m9d37be3[m HEAD@{21}: checkout: moving from backend to backend
+[33m9d37be3[m HEAD@{22}: reset: moving to HEAD
+[33m9d37be3[m HEAD@{23}: checkout: moving from main to backend
+[33m775f7c9[m HEAD@{24}: commit: updated logo
+[33mf9896d5[m HEAD@{25}: pull: Fast-forward
+[33m52c7616[m HEAD@{26}: checkout: moving from frontend to main
+[33m047ad17[m HEAD@{27}: commit: updated background
+[33m118092a[m HEAD@{28}: commit: updated background
+[33mc7f5812[m HEAD@{29}: commit: merged main
+[33m52c7616[m HEAD@{30}: merge main: Fast-forward
+[33mbb4da40[m[33m ([m[1;31morigin/master[m[33m)[m HEAD@{31}: checkout: moving from main to frontend
+[33m52c7616[m HEAD@{32}: commit: update db
+[33m8b23cd9[m HEAD@{33}: checkout: moving from backend to main
+[33m9d37be3[m HEAD@{34}: checkout: moving from main to backend
+[33m8b23cd9[m HEAD@{35}: commit: readme
+[33mcea801e[m HEAD@{36}: commit: readme
+[33mcb8db5e[m HEAD@{37}: pull: Fast-forward
+[33mbb4da40[m[33m ([m[1;31morigin/master[m[33m)[m HEAD@{38}: checkout: moving from backend to main
+[33m9d37be3[m HEAD@{39}: commit: backend
+[33mbb4da40[m[33m ([m[1;31morigin/master[m[33m)[m HEAD@{40}: checkout: moving from frontend to backend
+[33mbb4da40[m[33m ([m[1;31morigin/master[m[33m)[m HEAD@{41}: checkout: moving from main to frontend
+[33mbb4da40[m[33m ([m[1;31morigin/master[m[33m)[m HEAD@{42}: Branch: renamed refs/heads/master to refs/heads/main
+[33mbb4da40[m[33m ([m[1;31morigin/master[m[33m)[m HEAD@{44}: commit (initial): frontend done
