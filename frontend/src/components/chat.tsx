@@ -1,6 +1,7 @@
 import { useState, useRef, useEffect } from "react";
-import axios from "axios";
 import ReactMarkdown from "react-markdown";
+import { sendChatMessage } from "../axios/chatService"; // import from the service file
+import IntroText from "./IntroText";
 
 interface Message {
   role: "user" | "assistant";
@@ -21,26 +22,17 @@ export default function Chat() {
     scrollToBottom();
   }, [messages, loading]);
 
-  const sendMessage = async () => {
+  const handleSendMessage = async () => {
     if (!input.trim()) return;
 
-    const newMessages: Message[] = [
-      ...messages,
-      { role: "user" as const, content: input }
-    ];
-    setMessages(newMessages);
+    setMessages((prev) => [...prev, { role: "user", content: input }]);
+    const userInput = input;
     setInput("");
     setLoading(true);
 
     try {
-      const res = await axios.post("http://localhost:8000/chat", {
-        question: input
-      });
-
-      setMessages(prev => [
-        ...prev,
-        { role: "assistant" as const, content: res.data.answer }
-      ]);
+      const answer = await sendChatMessage(userInput);
+      setMessages((prev) => [...prev, { role: "assistant", content: answer }]);
     } catch (err) {
       console.error(err);
     } finally {
@@ -50,7 +42,13 @@ export default function Chat() {
 
   return (
     <div className="max-w-3xl mx-auto p-4 pb-8 flex flex-col h-screen">
-      <div className="flex-1 overflow-y-auto space-y-4 scrollbar-hide p-4 rounded">
+      {/* <div className="flex-1 overflow-y-auto space-y-4 scrollbar-hide p-4 rounded"> */}
+        <div className="flex-1 overflow-y-auto space-y-4 scrollbar-hide p-4 rounded">
+  {messages.length === 0 && !loading ? (
+    
+    <IntroText /> // show intro when there are no messages yet
+  ) : (
+    <>
         {messages.map((m, i) => (
           <div
             key={i}
@@ -77,24 +75,26 @@ export default function Chat() {
             </div>
           </div>
         )}
-
-        {/* Invisible element to scroll to */}
-        <div ref={messagesEndRef} />
-      </div>
+ </>
+  )}
+  <div ref={messagesEndRef} />
+</div>
+        {/* <div ref={messagesEndRef} />
+      </div> */}
 
       <div className="flex items-center border rounded-full p-1 px-2">
         <input
-            className="flex-1 p-3 rounded-full outline-none border-none"
-            value={input}
-            onChange={(e) => setInput(e.target.value)}
-            placeholder="Type your message..."
-            onKeyDown={(e) => e.key === "Enter" && sendMessage()}
+          className="flex-1 p-3 rounded-full outline-none border-none"
+          value={input}
+          onChange={(e) => setInput(e.target.value)}
+          placeholder="Type your message..."
+          onKeyDown={(e) => e.key === "Enter" && handleSendMessage()}
         />
         <button
-            className="bg-blue-500 text-white p-2 rounded-full hover:bg-blue-600 transition flex items-center justify-center"
-            onClick={sendMessage}
+          className="bg-blue-500 text-white p-2 rounded-full hover:bg-blue-600 transition flex items-center justify-center"
+          onClick={handleSendMessage}
         >
-            <svg
+          <svg
             xmlns="http://www.w3.org/2000/svg"
             width="20"
             height="20"
@@ -104,13 +104,12 @@ export default function Chat() {
             strokeWidth="2"
             strokeLinecap="round"
             strokeLinejoin="round"
-            >
+          >
             <path d="M5 12h14" />
             <path d="m12 5 7 7-7 7" />
-            </svg>
+          </svg>
         </button>
-        </div>
+      </div>
     </div>
   );
 }
-
